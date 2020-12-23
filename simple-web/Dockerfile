@@ -4,11 +4,13 @@ FROM golang:alpine AS builder
 # select working dir, set builder context
 WORKDIR /app
 
-# COPY all files in user context to working dir
-COPY . .
-
+# COPY dependency files, minimizes cache busting and rebuilds
+COPY go.mod .
 # install dependencies
 RUN go mod download
+
+# COPY all files
+COPY . .
 # build server
 RUN go build -o /app/server server.go
 
