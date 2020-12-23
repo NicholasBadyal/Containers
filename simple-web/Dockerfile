@@ -1,17 +1,18 @@
 # specify a base image
 FROM golang:alpine AS builder
 
-# select working dir
-WORKDIR /build/simple-web
+# select working dir, set builder context
+WORKDIR /app
 
-# COPY all files in context to working dir
+# COPY all files in user context to working dir
 COPY . .
 
-# build server
+# install dependencies
 RUN go mod download
+# build server
 RUN go build -o /app/server server.go
 
-# compress image
+# create new image
 FROM alpine
 
 # configure time
@@ -19,11 +20,11 @@ RUN apk update --no-cache
 RUN apk add --no-cache tzdata
 ENV TZ America/Los_Angeles
 
+# COPY directory from builder context
+COPY --from=builder app/server app/simple-server
+
 # select working dir
 WORKDIR /app
 
-# COPY directory from builder
-COPY --from=builder /app/server /app/server
-
 # default command
-CMD ["./server"]
+CMD ["./simple-server"]
