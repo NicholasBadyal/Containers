@@ -1,0 +1,10 @@
+version: '3'
+services:
+  redis-server:
+    image: 'redis'
+  rediboard:
+    restart: always
+    build: .
+    ports:
+      - "8080:8080"
+

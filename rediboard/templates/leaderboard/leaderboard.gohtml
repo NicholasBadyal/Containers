@@ -1,0 +1,9 @@
+{{ template "header" }}
+
+    {{ define "leaderboard" }}
+        {{range .}}
+            {{ template "board-element" .}}
+        {{end}}
+    {{ end }}
+
+{{ template "footer" }}

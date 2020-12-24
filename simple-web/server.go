@@ -14,7 +14,7 @@ func index(w http.ResponseWriter, req *http.Request) {
 	}
 }
 
-func foo (w http.ResponseWriter, req *http.Request) {
+func foo(w http.ResponseWriter, req *http.Request) {
 	_, err := io.WriteString(w, "foo")
 	if err != nil {
 		log.Print("failed to write")

@@ -1,0 +1,9 @@
+{{ template "header" }}
+
+{{ define "internal_error" }}
+    <h1>Internal Error</h1>
+    <p>{{.Error}}</p>
+    <p>Please try again.</p>
+{{end}}
+
+{{ template "footer" }}

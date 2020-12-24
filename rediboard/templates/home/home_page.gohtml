@@ -1,0 +1,16 @@
+{{ template "header"}}
+
+{{ define "home_page" }}
+<h1>Welcome to Rediboard</h1>
+    {{ if . }}
+        <p>{{.Username}}, {{.Points}}</p>
+    {{else}}
+        <form action="/points" method="post" enctype="multipart/form-data" >
+            <input type="text" id="username" name="username">
+            <input type="text" id="points" name="points" value="1">
+            <input type="submit" value="Submit">
+        </form>
+    {{end}}
+{{end}}
+
+{{template "footer"}}
